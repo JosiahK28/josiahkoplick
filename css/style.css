@@ -1,10 +1,11 @@
 /* Josiah Koplick — house index.
-   Same iron, parchment, and gold as The Hidden Forge.
-   The frame is the instrument. The doors are plain language. */
+   Iron, parchment, and gold, shared with The Hidden Forge.
+   Name on the left. Doors on the right. Plain language throughout. */
 
 :root {
   --ink: #100e0b;
-  --ink-soft: #1a160f;
+  --ink-card: #1b1711;
+  --ink-card-hot: #241e16;
   --parchment: #ece2c6;
   --parchment-soft: #cbbd9e;
   --gold: #b8894a;
@@ -24,7 +25,11 @@ html {
 
 body {
   margin: 0;
-  background: var(--ink);
+  min-height: 100dvh;
+  background:
+    radial-gradient(80% 46% at 8% 0%, rgba(184, 137, 74, 0.16), transparent 58%),
+    radial-gradient(48% 36% at 100% 100%, rgba(122, 36, 32, 0.22), transparent 62%),
+    var(--ink);
   color: var(--parchment);
   font-family: var(--body);
   font-size: 1.0625rem;
@@ -46,148 +51,156 @@ body {
 
 .skip:focus { top: 1rem; }
 
-.wrap {
+.stage {
   min-height: 100dvh;
   display: flex;
   flex-direction: column;
   padding:
-    max(1.25rem, env(safe-area-inset-top))
+    max(1.5rem, env(safe-area-inset-top))
     max(1.25rem, env(safe-area-inset-right))
-    max(1.25rem, env(safe-area-inset-bottom))
+    max(1.5rem, env(safe-area-inset-bottom))
     max(1.25rem, env(safe-area-inset-left));
 }
 
-.panel {
-  width: min(40rem, 100%);
+.wrap {
+  width: min(68rem, 100%);
   margin: auto;
-  border: 1px solid var(--iron);
-  background-color: var(--ink);
-  background-image:
-    linear-gradient(rgba(184, 137, 74, 0.045) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(184, 137, 74, 0.045) 1px, transparent 1px);
-  background-size: 28px 28px;
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  gap: clamp(2rem, 5vw, 4.5rem);
+  align-items: center;
 }
-
-.status,
-.intro,
-.colophon { padding-left: 1.25rem; padding-right: 1.25rem; }
 
 .status {
   display: flex;
   justify-content: space-between;
   gap: 1rem;
-  margin: 0;
-  padding-top: 0.85rem;
-  padding-bottom: 0.85rem;
-  border-bottom: 1px solid var(--iron);
+  margin: 0 0 1.75rem;
   color: var(--gold-bright);
   font-family: var(--mono);
-  font-size: 0.75rem;
-  letter-spacing: 0.14em;
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
 }
 
-.intro { padding-top: 2.25rem; padding-bottom: 1.75rem; }
+.kicker {
+  margin: 0 0 0.85rem;
+  color: var(--gold);
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
 
 h1 {
   margin: 0;
+  max-width: 8ch;
   font-family: var(--display);
-  font-size: clamp(3.1rem, 8vw, 4.75rem);
+  font-size: clamp(3.4rem, 6.4vw, 5.6rem);
   font-weight: 600;
-  letter-spacing: -0.03em;
-  line-height: 0.92;
+  letter-spacing: -0.035em;
+  line-height: 1.02;
   text-wrap: balance;
 }
 
 .lede {
-  max-width: 28rem;
-  margin: 1.1rem 0 0;
+  max-width: 26rem;
+  margin: 1.35rem 0 0;
+  padding-top: 1.15rem;
+  border-top: 1px solid var(--iron);
   color: var(--parchment-soft);
-  font-size: 1.2rem;
+  font-size: 1.22rem;
   line-height: 1.45;
   text-wrap: pretty;
 }
 
+#places {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
 .door {
   display: grid;
-  grid-template-columns: 2.4rem 1fr auto;
+  grid-template-columns: 2.2rem minmax(0, 1fr) auto;
   gap: 0.85rem;
   align-items: center;
-  min-height: 4.5rem;
-  padding: 0.95rem 1.25rem;
-  border-top: 1px solid var(--iron);
+  min-height: 5rem;
+  padding: 0.95rem 1.1rem 0.95rem 1rem;
+  border: 1px solid var(--iron);
+  border-radius: 2px;
+  background: rgba(27, 23, 17, 0.92);
   color: inherit;
   text-decoration: none;
-  transition: background-color 160ms ease;
+  transition: border-color 160ms ease, background-color 160ms ease, transform 160ms ease;
   -webkit-tap-highlight-color: transparent;
 }
 
-.door:hover { background: rgba(236, 226, 198, 0.04); }
+.door:hover {
+  border-color: var(--gold);
+  background: var(--ink-card-hot);
+  transform: translateX(4px);
+}
 
 .door:focus-visible {
   outline: 2px solid var(--gold-bright);
-  outline-offset: -2px;
-  background: rgba(236, 226, 198, 0.04);
+  outline-offset: 3px;
+  border-color: var(--gold);
+  background: var(--ink-card-hot);
 }
 
 .idx {
-  color: var(--gold);
+  color: var(--gold-bright);
   font-family: var(--mono);
-  font-size: 0.78rem;
-  letter-spacing: 0.08em;
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
 }
 
 .copy {
   display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  gap: 0.2rem 0.9rem;
+  flex-direction: column;
+  gap: 0.15rem;
   min-width: 0;
 }
 
 .title {
   font-family: var(--display);
-  font-size: 1.45rem;
+  font-size: 1.55rem;
   font-weight: 600;
   letter-spacing: -0.02em;
-  line-height: 1.1;
+  line-height: 1.15;
 }
 
-.note { color: var(--parchment-soft); }
+.note {
+  color: var(--parchment-soft);
+  font-size: 0.98rem;
+}
 
 .go {
-  color: var(--gold-bright);
-  font-family: var(--mono);
-  font-size: 0.72rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-}
-
-.colophon {
-  margin: 0;
-  padding-top: 1.1rem;
-  padding-bottom: 1.15rem;
-  border-top: 1px solid var(--iron);
-  color: var(--parchment-soft);
+  color: var(--gold);
   font-family: var(--mono);
   font-size: 0.75rem;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.02em;
 }
 
-@media (max-width: 36rem) {
-  .status,
-  .intro,
-  .colophon { padding-left: 1rem; padding-right: 1rem; }
+@media (max-width: 52rem) {
+  .wrap {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
 
-  .door { padding-left: 1rem; padding-right: 1rem; }
+  h1 { max-width: none; }
 
   .go { display: none; }
+
+  .door { grid-template-columns: 2.2rem minmax(0, 1fr); }
 }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
 
-  .door { transition: none; }
+  .door,
+  .door:hover { transition: none; transform: none; }
 }
 
 @media print {
@@ -195,16 +208,17 @@ h1 {
   .go,
   .skip { display: none; }
 
-  body,
-  .panel {
-    background: #fff;
-    color: #111;
-  }
+  body { background: #fff; color: #111; }
 
+  .kicker,
   .lede,
   .note,
-  .colophon,
   .idx { color: #333; }
+
+  .door {
+    background: #fff;
+    border-color: #ccc;
+  }
 
   a { color: inherit; text-decoration: none; }
 }
