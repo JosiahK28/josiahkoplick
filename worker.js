@@ -1,6 +1,6 @@
 /* josiahkoplick.com Worker.
-   Static files are served straight from the assets folder; this script only
-   runs for paths that are not files. It adds one endpoint:
+   Every request passes through here first (run_worker_first), so www can be
+   sent to the bare domain. Everything else goes to the static files, plus:
      GET /api/essays  ->  the newest Substack posts as JSON, cached for an hour. */
 
 const FEED = "https://josiahkoplick.substack.com/feed";
@@ -10,6 +10,10 @@ const TTL = 3600;
 export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
+    if (url.hostname.startsWith("www.")) {
+      url.hostname = url.hostname.slice(4);
+      return Response.redirect(url.toString(), 301);
+    }
     if (url.pathname === "/api/essays") return essays(request, ctx);
     return env.ASSETS.fetch(request);
   },
