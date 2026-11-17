@@ -24,6 +24,9 @@ off the public site.
 
 `og.png` is the 1200×630 card shown when the link is shared.
 
+Every request runs through `worker.js` first (`run_worker_first`), so `www.` gets a 301 to the bare domain.
+Any address that is not a file gets `404.html`, styled like the index, with a real 404 status.
+
 ## Backups
 
 `backup/forge-2026-11-17` is the site exactly as it was before the essays, preview card and Worker were
