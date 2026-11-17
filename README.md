@@ -22,7 +22,7 @@ returns the newest three posts, cached for an hour. `js/essays.js` fills the "La
 from it. If the feed fails, the section stays hidden. `.assetsignore` keeps the Worker, config and README
 off the public site.
 
-`og.png` is the 1200×630 card shown when the link is shared.
+`og.png` is the 1200×630 card shown when the link is shared. `DESIGN.md` is the full design system (colors, type, components, motion, voice) for making anything else in this style.
 
 Every request runs through `worker.js` first (`run_worker_first`), so `www.` gets a 301 to the bare domain.
 Any address that is not a file gets `404.html`, styled like the index, with a real 404 status.
