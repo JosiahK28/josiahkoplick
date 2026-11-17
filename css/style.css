@@ -85,7 +85,7 @@ body {
 
 .grain {
   position: fixed;
-  inset: -50%;
+  inset: 0;
   z-index: 1;
   pointer-events: none;
   opacity: 0.09;
@@ -349,7 +349,7 @@ h1 .two {
   text-decoration: none;
   overflow: hidden;
   isolation: isolate;
-  animation: rise 0.9s var(--ease) backwards;
+  animation: rise-lite 0.9s var(--ease) backwards;
   transition: background-color 300ms ease;
   -webkit-tap-highlight-color: transparent;
 }
@@ -389,10 +389,8 @@ h1 .two {
   transition: transform 520ms var(--ease);
 }
 
-.door:hover::before,
 .door:focus-visible::before { opacity: 1; }
 
-.door:hover::after,
 .door:focus-visible::after { transform: scaleX(1); }
 
 .door:focus-visible {
@@ -451,7 +449,6 @@ h1 .two {
   transition: translate 400ms var(--ease);
 }
 
-.door:hover .title,
 .door:focus-visible .title {
   color: var(--gold-white);
   font-style: italic;
@@ -459,19 +456,15 @@ h1 .two {
   translate: 6px 0;
 }
 
-.door:hover .idx,
 .door:focus-visible .idx {
   color: var(--gold-bright);
   text-shadow: 0 0 14px rgba(224, 102, 47, 0.7);
 }
 
-.door:hover .note,
 .door:focus-visible .note { opacity: 1; }
 
-.door:hover .go,
 .door:focus-visible .go { color: var(--gold-bright); }
 
-.door:hover .go i,
 .door:focus-visible .go i { translate: 5px 0; }
 
 /* ---------- Latest essays ---------- */
@@ -525,7 +518,7 @@ h1 .two {
   text-decoration: none;
   overflow: hidden;
   isolation: isolate;
-  animation: rise 0.9s var(--ease) backwards;
+  animation: rise-lite 0.9s var(--ease) backwards;
   transition: border-color 300ms ease, background-color 300ms ease;
 }
 
@@ -542,13 +535,11 @@ h1 .two {
   transition: transform 520ms var(--ease);
 }
 
-.essay:hover,
 .essay:focus-visible {
   border-color: rgba(184, 137, 74, 0.6);
   background: var(--ink-card-hot);
 }
 
-.essay:hover::after,
 .essay:focus-visible::after { transform: scaleX(1); }
 
 .essay:focus-visible {
@@ -575,7 +566,6 @@ h1 .two {
   transition: color 300ms ease;
 }
 
-.essay:hover .e-title,
 .essay:focus-visible .e-title {
   color: var(--gold-white);
   font-style: italic;
@@ -602,8 +592,48 @@ h1 .two {
 }
 
 .latest-all i { font-style: normal; transition: translate 400ms var(--ease); }
-.latest-all:hover { color: var(--gold-bright); }
-.latest-all:hover i { translate: 5px 0; }
+
+/* ---------- Hover (mouse and trackpad only) ---------- */
+
+@media (hover: hover) {
+  .door:hover::before { opacity: 1; }
+
+  .door:hover::after { transform: scaleX(1); }
+
+  .door:hover .title {
+    color: var(--gold-white);
+    font-style: italic;
+    letter-spacing: -0.01em;
+    translate: 6px 0;
+  }
+
+  .door:hover .idx {
+    color: var(--gold-bright);
+    text-shadow: 0 0 14px rgba(224, 102, 47, 0.7);
+  }
+
+  .door:hover .note { opacity: 1; }
+
+  .door:hover .go { color: var(--gold-bright); }
+
+  .door:hover .go i { translate: 5px 0; }
+
+  .essay:hover {
+    border-color: rgba(184, 137, 74, 0.6);
+    background: var(--ink-card-hot);
+  }
+
+  .essay:hover::after { transform: scaleX(1); }
+
+  .essay:hover .e-title {
+    color: var(--gold-white);
+    font-style: italic;
+  }
+
+  .latest-all:hover { color: var(--gold-bright); }
+
+  .latest-all:hover i { translate: 5px 0; }
+}
 
 /* ---------- Footer ---------- */
 
@@ -625,6 +655,11 @@ h1 .two {
 .foot-mark { color: var(--gold); }
 
 /* ---------- Motion ---------- */
+
+@keyframes rise-lite {
+  from { opacity: 0; translate: 0 18px; }
+  to { opacity: 1; translate: 0 0; }
+}
 
 @keyframes rise {
   from { opacity: 0; translate: 0 18px; filter: blur(6px); }
@@ -657,12 +692,12 @@ h1 .two {
 }
 
 @keyframes grain {
-  0% { transform: translate(0, 0); }
-  20% { transform: translate(-3%, 2%); }
-  40% { transform: translate(2%, -4%); }
-  60% { transform: translate(-4%, -1%); }
-  80% { transform: translate(3%, 3%); }
-  100% { transform: translate(0, 0); }
+  0% { background-position: 0 0; }
+  20% { background-position: -40px 25px; }
+  40% { background-position: 30px -55px; }
+  60% { background-position: -60px -15px; }
+  80% { background-position: 45px 40px; }
+  100% { background-position: 0 0; }
 }
 
 /* ---------- Small screens ---------- */
