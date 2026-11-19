@@ -16,7 +16,7 @@ Cloudflare Workers with static assets (`wrangler.jsonc`). Files are served as-is
 paths that are not files. Right now that is one endpoint, `/api/essays`, which reads the Substack feed and
 returns the newest three posts, cached for an hour. `js/essays.js` fills the "Latest from the desk" section
 from it. If the feed fails, the section stays hidden. `.assetsignore` keeps the Worker, config and README
-off the public site. `worker.js` also adds security headers (CSP, HSTS, nosniff, referrer and permissions policies)
+off the public site. `worker.js` also adds security headers (CSP, HSTS, nosniff, referrer and permissions policies; the CSP also allows Cloudflare Web Analytics)
 to every response; the CSP allows only this site's own scripts, styles, fonts and images, so any new
 external resource must be added there. Fonts are self-hosted in `fonts/` (latin subset), with no calls to Google.
 
