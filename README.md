@@ -4,15 +4,11 @@ House index for Josiah Koplick. One page, plain HTML. The Hidden Forge stays on 
 
 ## Publish
 
-The name is registered at Namecheap. DNS is still Namecheap parking until the nameservers change.
+The site is a Cloudflare Worker with static assets, deployed from this repo with `npx wrangler deploy`.
+The domain is registered at Namecheap and uses Cloudflare nameservers. `josiahkoplick.com` and `www` are
+custom domains on the Worker; `www` is redirected to the bare domain by `worker.js`.
 
-1. Push this folder to a public GitHub repo.
-2. In Cloudflare, add the site on the Free plan and create a Pages project from that repo. Framework preset: None. Output directory: `/`.
-3. In Pages, set the custom domain to `josiahkoplick.com`.
-4. In Namecheap, set the domain to Custom DNS and replace the `registrar-servers.com` nameservers with the two Cloudflare gives you.
-5. After the domain answers, attach `www` as well if Pages offers it, and send `www` to the bare domain.
-
-Email forwarding, if wanted, is turned on inside Cloudflare. The destination inbox stays there.
+Email forwarding, if wanted, is turned on inside Cloudflare Email Routing. The destination inbox stays there.
 
 ## How it runs
 
@@ -20,7 +16,9 @@ Cloudflare Workers with static assets (`wrangler.jsonc`). Files are served as-is
 paths that are not files. Right now that is one endpoint, `/api/essays`, which reads the Substack feed and
 returns the newest three posts, cached for an hour. `js/essays.js` fills the "Latest from the desk" section
 from it. If the feed fails, the section stays hidden. `.assetsignore` keeps the Worker, config and README
-off the public site.
+off the public site. `worker.js` also adds security headers (CSP, HSTS, nosniff, referrer and permissions policies)
+to every response; the CSP allows only this site's own scripts, styles, fonts and images, so any new
+external resource must be added there. Fonts are self-hosted in `fonts/` (latin subset), with no calls to Google.
 
 `og.png` is the 1200×630 card shown when the link is shared. `DESIGN.md` is the full design system (colors, type, components, motion, voice) for making anything else in this style.
 
