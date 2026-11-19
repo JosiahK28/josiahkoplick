@@ -1,21 +1,39 @@
 /* josiahkoplick.com Worker.
    Every request passes through here first (run_worker_first), so www can be
    sent to the bare domain. Everything else goes to the static files, plus:
-     GET /api/essays  ->  the newest Substack posts as JSON, cached for an hour. */
+     GET /api/essays  ->  the newest Substack posts as JSON, cached for an hour.
+   Every response also gets the security headers below. */
 
 const FEED = "https://josiahkoplick.substack.com/feed";
 const LIMIT = 3;
 const TTL = 3600;
+
+const SECURITY = {
+  "content-security-policy":
+    "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; " +
+    "connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'",
+  "strict-transport-security": "max-age=31536000; includeSubDomains",
+  "x-content-type-options": "nosniff",
+  "referrer-policy": "strict-origin-when-cross-origin",
+  "permissions-policy": "camera=(), microphone=(), geolocation=(), payment=(), usb=()",
+  "cross-origin-opener-policy": "same-origin",
+};
+
+function secure(res) {
+  const out = new Response(res.body, res);
+  for (const [k, v] of Object.entries(SECURITY)) out.headers.set(k, v);
+  return out;
+}
 
 export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
     if (url.hostname.startsWith("www.")) {
       url.hostname = url.hostname.slice(4);
-      return Response.redirect(url.toString(), 301);
+      return secure(Response.redirect(url.toString(), 301));
     }
-    if (url.pathname === "/api/essays") return essays(request, ctx);
-    return env.ASSETS.fetch(request);
+    if (url.pathname === "/api/essays") return secure(await essays(request, ctx));
+    return secure(await env.ASSETS.fetch(request));
   },
 };
 

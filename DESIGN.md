@@ -119,8 +119,8 @@ Rule: warmth comes from the **bottom** (the fire) and a little gold light from t
 | Body | **Source Serif 4** (400, 400 italic) | Georgia, serif | Taglines always italic |
 | Label | **JetBrains Mono** (400) | ui-monospace, monospace | Always UPPERCASE, wide letter-spacing |
 
-Google Fonts URL (exactly what the site loads):
-`https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Source+Serif+4:ital,wght@0,400;1,400&family=JetBrains+Mono:wght@400&display=swap`
+Font files (self-hosted):
+Self-hosted from `/fonts/` (latin subset woff2, declared in `css/style.css`).
 
 ### Scale (web; base 16px)
 | Style | Font | Size | Weight | Line height | Letter-spacing | Color |
