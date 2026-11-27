@@ -202,7 +202,7 @@ fill, square. May pulse a soft ember glow (`0 0 50px 4px rgba(224, 102, 47, 0.45
   Color: hue 18–46°, saturation 90–100%, lightness 55–80%. Core radius 0.5–2.7px with a soft halo 4× that size, blended
   additively ("lighter" / screen). Count ≈ one per 9,000 px² of screen (40–150). They fade in, flicker, and fade out; they move
   away from the cursor. In stills: 60–130 embers, most in the lower third, a few large and blurred near the camera.
-- **Grain:** fractal noise (base frequency 0.85, 3 octaves) tinted parchment, 9% opacity, over everything. It shifts slightly six times a second.
+- **Grain:** fractal noise (base frequency 0.85, 3 octaves) tinted parchment, 9% opacity, over everything. It shifts slightly six times a second. On 1x screens (≤ 1.25dppx) it is off: at that density it reads as coarse static, and moving, as flicker.
 - **Glow:** light is warm and comes from below. Glows are soft ember or gold, never hard drop shadows.
 - **Imagery** (if photos or illustrations are ever used): low-key, warm, lit by fire or a single lamp; iron, stone, paper, leather,
   old books, forge work. Grade toward the palette: crushed warm blacks, gold highlights. No cool tones, no bright daylight, no stock-photo smiles.

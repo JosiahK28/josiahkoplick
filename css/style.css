@@ -811,6 +811,13 @@ h1 .two {
   .glow { display: none; }
 }
 
+/* Low-density screens (1x, e.g. a 1080p monitor): each noise speck is a
+   full device pixel, so the grain reads as coarse static and, moving, as
+   flicker. Drop it there; dense screens keep the moving grain. */
+@media (max-resolution: 1.25dppx) {
+  .grain { display: none; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
